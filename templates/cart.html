@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Cart | lushRiwaaz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1 class="brand">lushRiwaaz</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/cart" class="cart-link">🛒 Cart ({{ cart_count or 0 }})</a>
+      {% if session.get('user_name') %}
+        <span class="user">Hi, {{ session['user_name'] }}</span>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+      {% else %}
+        <a href="/login">Login</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main class="cart-page">
+    <h2>🛒 My Cart</h2>
+
+    {% if cart_items %}
+      <table class="cart-table">
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Subtotal</th>
+        </tr>
+
+        {% set total = 0 %}
+        {% for item in cart_items %}
+          {% set subtotal = item.price * item.quantity %}
+          {% set total = total + subtotal %}
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹{{ "%.2f"|format(item.price) }}</td>
+            <td>₹{{ "%.2f"|format(subtotal) }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+
+      <div class="checkout-section">
+        <p><strong>Total Amount:</strong> ₹{{ "%.2f"|format(total) }}</p>
+        
+        <form action="/place_order" method="POST" class="checkout-form">
+          <label>Shipping Address:</label><br>
+          <textarea name="address" required placeholder="Enter your delivery address..."></textarea>
+          <br>
+          <button type="submit" class="place-order-btn">Place Order</button>
+        </form>
+      </div>
+
+    {% else %}
+      <p>Your cart is empty 🛍️</p>
+    {% endif %}
+  </main>
+
+  <footer>
+    <p>© 2025 lushRiwaaz — Crafted with love 💖</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | lushRiwaaz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <header>
+    <h1 class="brand">lushRiwaaz</h1>
+    <nav><a href="/">Home</a></nav>
+  </header>
+
+  <main class="auth-container">
+    <div class="auth-box">
+      <h2>Create Account 🌼</h2>
+      <form action="/signup" method="POST">
+        <label>Full Name</label>
+        <input type="text" name="name" placeholder="Enter your name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter your email" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter your password" required>
+
+        <button type="submit" class="auth-btn">Sign Up</button>
+      </form>
+
+      <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 lushRiwaaz — Crafted for comfort & beauty.</p>
+  </footer>
+</body>
+</html>

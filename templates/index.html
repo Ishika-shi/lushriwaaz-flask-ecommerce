@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LushRiwaaz | Home Aesthetics</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+
+<body>
+  <header>
+    <h1 class="brand">lushRiwaaz</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/cart" class="cart-link">
+        🛒 Cart (<span id="cart-count">{{ cart_count or 0 }}</span>)
+      </a>
+      {% if session.get('user_name') %}
+      <span class="user">Hi, {{ session['user_name'] }}</span>
+      <a href="/profile">Profile</a>
+      <a href="/logout">Logout</a>
+      {% else %}
+      <a href="/login">Login</a>
+      {% endif %}
+
+    </nav>
+
+    <!-- 🔍 Search bar -->
+    <form action="/search" method="GET" class="search-bar">
+      <input type="text" name="query" placeholder="Search products..." required />
+      <button type="submit">🔍</button>
+    </form>
+  </header>
+
+
+  <main>
+    <div class="category-filter">
+      <a href="/" class="filter-btn">All</a>
+      <a href="/category/Bedsheets" class="filter-btn">Bedsheets</a>
+      <a href="/category/Cushions" class="filter-btn">Cushions</a>
+      <a href="/category/Carpets" class="filter-btn">Carpets</a>
+      <a href="/category/Ac covers" class="filter-btn">AC Covers</a>
+    </div>
+
+    <section id="bedsheets">
+      <h2>Bedsheets</h2>
+      <div class="product-grid">
+        {% for product in products if product.category == 'Bedsheets' %}
+        <div class="product-card">
+          <img src="{{ url_for('static', filename=product.image_path) }}" alt="{{ product.name }}">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.short_desc }}</p>
+          <p class="price">₹{{ product.price }}</p>
+          <button class="add-to-cart" data-id="{{ product.id }}">Add to Cart</button>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="cushions">
+      <h2>Cushions</h2>
+      <div class="product-grid">
+        {% for product in products if product.category == 'Cushions' %}
+        <div class="product-card">
+          <img src="{{ url_for('static', filename=product.image_path) }}" alt="{{ product.name }}">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.short_desc }}</p>
+          <p class="price">₹{{ product.price }}</p>
+          <button class="add-to-cart" data-id="{{ product.id }}">Add to Cart</button>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="carpets">
+      <h2>Carpets</h2>
+      <div class="product-grid">
+        {% for product in products if product.category == 'Carpets' %}
+        <div class="product-card">
+          <img src="{{ url_for('static', filename=product.image_path) }}" alt="{{ product.name }}">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.short_desc }}</p>
+          <p class="price">₹{{ product.price }}</p>
+          <button class="add-to-cart" data-id="{{ product.id }}">Add to Cart</button>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="Ac covers">
+      <h2>Ac covers</h2>
+      <div class="product-grid">
+        {% for product in products if product.category == 'AC Covers' %}
+        <div class="product-card">
+          <img src="{{ url_for('static', filename=product.image_path) }}" alt="{{ product.name }}">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.short_desc }}</p>
+          <p class="price">₹{{ product.price }}</p>
+          <button class="add-to-cart" data-id="{{ product.id }}">Add to Cart</button>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal (for quick view) -->
+  <div id="product-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img id="modal-img" src="" alt="">
+      <h3 id="modal-title"></h3>
+      <p id="modal-desc"></p>
+      <p id="modal-price" class="price"></p>
+      <button id="modal-add">Add to Cart</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 lushRiwaaz — All your home aesthetics under one roof.</p>
+  </footer>
+</body>
+
+</html>

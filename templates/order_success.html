@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Placed | lushRiwaaz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1 class="brand">lushRiwaaz</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/cart">Cart ({{ cart_count or 0 }})</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <main class="success-container">
+    <div class="success-box">
+      <h2>🎉 Order Successfully Placed!</h2>
+      <p>Thank you for shopping with <strong>lushRiwaaz</strong> 💖</p>
+      <p>Your order will be delivered soon to your provided address.</p>
+      <a href="/" class="continue-btn">← Continue Shopping</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 lushRiwaaz — Crafted with care for your home.</p>
+  </footer>
+</body>
+</html>

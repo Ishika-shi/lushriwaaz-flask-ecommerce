@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile | lushRiwaaz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1 class="brand">lushRiwaaz</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/cart" class="cart-link">🛒 Cart ({{ cart_count or 0 }})</a>
+      <a href="/profile">Profile</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <main class="profile-container">
+    <section class="profile-info">
+      <h2>👤 My Profile</h2>
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <hr>
+      <h3>📦 My Orders</h3>
+      
+      {% if orders %}
+        {% for order in orders %}
+          <div class="order-card">
+            <p><strong>Order ID:</strong> {{ order.id }}</p>
+            <p><strong>Total:</strong> ₹{{ "%.2f"|format(order.total_amount) }}</p>
+            <p><strong>Address:</strong> {{ order.shipping_address }}</p>
+            <p><strong>Date:</strong> {{ order.created_at.strftime("%d %b %Y %I:%M %p") }}</p>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-orders">You haven’t placed any orders yet 🛍️</p>
+      {% endif %}
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 lushRiwaaz — Designed with love 💖</p>
+  </footer>
+</body>
+</html>
