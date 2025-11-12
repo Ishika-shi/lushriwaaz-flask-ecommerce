@@ -26,7 +26,7 @@ Technology stack used:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Ishika/lushriwaaz.git
+   git clone https://github.com/Ishika-shi/lushriwaaz.git
    cd lushriwaaz
 ````
 
